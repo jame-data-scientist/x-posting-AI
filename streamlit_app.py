@@ -98,10 +98,17 @@ from ai_generator_v2 import generate_posts
 
 # ─── Keys from .env ONLY ──────────────────────────────────────────────────────
 def get_or_key():
-    return os.getenv("OPENROUTER_API_KEY", "")
+    # Check Streamlit secrets first (for Cloud), then local .env or os environ
+    try:
+        return st.secrets.get("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY", ""))
+    except Exception:
+        return os.getenv("OPENROUTER_API_KEY", "")
 
 def get_gemini_key():
-    return os.getenv("GEMINI_API_KEY", "")
+    try:
+        return st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY", ""))
+    except Exception:
+        return os.getenv("GEMINI_API_KEY", "")
 
 APP_NAME = os.getenv("APP_NAME", "Height Leveling")
 PROJ_DIR = os.getenv("PROJECT_FOLDER", "./project")
