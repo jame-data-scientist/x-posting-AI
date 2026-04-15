@@ -12,8 +12,8 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 
-load_dotenv(override=True)
-
+env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
+load_dotenv(dotenv_path=env_path, override=True)
 # ─── Page config MUST be first ───────────────────────────────────────────────
 st.set_page_config(
     page_title="Height Leveling · X Auto Poster",
@@ -97,15 +97,19 @@ from x_poster import test_connection
 from ai_generator_v2 import generate_posts
 
 # ─── Keys from .env ONLY ──────────────────────────────────────────────────────
-OR_KEY     = os.getenv("OPENROUTER_API_KEY", "")
-GEMINI_KEY = os.getenv("GEMINI_API_KEY", "")
-APP_NAME   = os.getenv("APP_NAME", "Height Leveling")
-PROJ_DIR   = os.getenv("PROJECT_FOLDER", "./project")
+def get_or_key():
+    return os.getenv("OPENROUTER_API_KEY", "")
+
+def get_gemini_key():
+    return os.getenv("GEMINI_API_KEY", "")
+
+APP_NAME = os.getenv("APP_NAME", "Height Leveling")
+PROJ_DIR = os.getenv("PROJECT_FOLDER", "./project")
 
 # ─── Session state ────────────────────────────────────────────────────────────
 def _init():
     defs = {
-        "provider":        "Google Gemini" if (GEMINI_KEY and not OR_KEY) else "OpenRouter",
+        "provider":        "Google Gemini" if (get_gemini_key() and not get_or_key()) else "OpenRouter",
         "or_models":       [],      # all OpenRouter models (live fetched)
         "or_fetched":      False,
         "or_prov_filter":  "All",
@@ -124,15 +128,15 @@ _init()
 init_db()
 
 # ─── Auto-fetch OpenRouter models on first load ───────────────────────────────
-if OR_KEY and not st.session_state.or_fetched:
+if get_or_key() and not st.session_state.or_fetched:
     with st.spinner("⏳ Loading OpenRouter models..."):
-        models = fetch_all_models(OR_KEY)
+        models = fetch_all_models(get_or_key())
         st.session_state.or_models  = models
         st.session_state.or_fetched = True
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 def _api_key():
-    return GEMINI_KEY if st.session_state.provider == "Google Gemini" else OR_KEY
+    return get_gemini_key() if st.session_state.provider == "Google Gemini" else get_or_key()
 
 def _active_model():
     return (st.session_state.google_model
@@ -222,14 +226,14 @@ with st.sidebar:
     if st.session_state.provider == "OpenRouter":
         st.markdown("**🤖 Model — OpenRouter**")
 
-        if not OR_KEY:
+        if not get_or_key():
             st.caption("Add OPENROUTER_API_KEY to .env to load models")
         else:
             models = st.session_state.or_models  # list of enriched dicts
             if not models:
                 if st.button("🔄 Retry loading models", use_container_width=True):
                     with st.spinner("Loading..."):
-                        models = fetch_all_models(OR_KEY)
+                        models = fetch_all_models(get_or_key())
                         st.session_state.or_models  = models
                         st.session_state.or_fetched = True
                     st.rerun()
@@ -289,7 +293,7 @@ with st.sidebar:
                 # Refresh button
                 if st.button("🔄 Refresh model list", use_container_width=True):
                     with st.spinner("Refreshing..."):
-                        new_models = fetch_all_models(OR_KEY)
+                        new_models = fetch_all_models(get_or_key())
                         st.session_state.or_models = new_models
                     st.success(f"Loaded {len(new_models)} models")
                     st.rerun()
