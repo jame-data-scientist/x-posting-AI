@@ -1,0 +1,616 @@
+================================================================================
+  Height Leveling — COMPREHENSIVE PROJECT GUIDE
+================================================================================
+  Document Version: 1.0
+  Date: April 2026
+  Scope: Full use-case, goal, and feature documentation (no code)
+================================================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PART 1 — THE MAIN PRODUCT: Height Leveling (Mobile App)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+────────────────────────────────────────────────────────────────────────────────
+1.1  WHAT IS Height Leveling?
+────────────────────────────────────────────────────────────────────────────────
+
+Height Leveling is a cross-platform mobile application (built with Flutter)
+that helps young people — primarily teenagers and young adults — maximize their
+natural height potential through science-backed daily habits.
+
+The app acts as a personal growth optimization coach. It tracks height over time,
+helps users follow a structured daily protocol of exercises, nutrition, sleep, and
+supplementation, then uses artificial intelligence to analyze data and forecast
+future height outcomes.
+
+The core belief behind the app is that while genetics set a ceiling on height,
+most people never reach their true genetic potential because of poor sleep,
+bad nutrition, lack of exercise, and other lifestyle factors. Height Leveling addresses this.
+
+────────────────────────────────────────────────────────────────────────────────
+1.2  WHO IS IT FOR?
+────────────────────────────────────────────────────────────────────────────────
+
+Primary Users:
+  - Teenagers and young adults (ages 13–23) who are still in or near their
+    growth phase and want to maximize their natural height.
+  - Parents who want to help their children optimize their growth potential.
+  - Fitness-conscious individuals who want data-driven insight into their
+    physical development.
+
+Secondary Users:
+  - People interested in body composition optimization (nutrition, sleep, hormones).
+  - Anyone tracking long-term health metrics with an interest in gamification
+    and achievement systems.
+
+────────────────────────────────────────────────────────────────────────────────
+1.3  THE PROBLEM Height Leveling SOLVES
+────────────────────────────────────────────────────────────────────────────────
+
+Most people trying to grow taller have no clear system. They might hear advice
+like "drink milk" or "do stretches" but have no way to:
+
+  1. Track whether they are actually growing.
+  2. Know which habits have the highest impact on natural height.
+  3. Understand what nutrients they are deficient in.
+  4. Stay consistent with a proven daily routine.
+  5. Get an AI-powered forecast of where they will end up.
+  6. Be held accountable through streaks and achievements.
+
+Height Leveling solves all six of these problems in a single, cohesive, gamified app.
+
+────────────────────────────────────────────────────────────────────────────────
+1.4  CORE PHILOSOPHY
+────────────────────────────────────────────────────────────────────────────────
+
+The app is built around four evidence-based pillars of height optimization:
+
+  PILLAR 1 — SLEEP
+    Human Growth Hormone (HGH) is primarily released during deep sleep
+    (specifically stages 3 and 4). Proper sleep (8+ hours, consistent schedule,
+    correct posture) is the single most impactful factor for natural HGH
+    production. The app tracks sleep quality, encourages good sleep hygiene,
+    and rewards users who maintain consistent high-quality sleep streaks.
+
+  PILLAR 2 — NUTRITION
+    Bone growth and density require a very specific nutritional foundation.
+    The most critical nutrients are:
+      - Calcium (bone matrix building)
+      - Vitamin D (calcium absorption)
+      - Vitamin K2 (directs calcium to bones, not arteries)
+      - Magnesium (bone flexibility)
+      - Zinc (cell growth and protein synthesis)
+      - Protein (muscle and bone tissue repair)
+      - Boron (extends Vitamin D half-life, supports testosterone)
+      - Omega-3 (reduces inflammation, supports bone repair)
+      - Collagen/Glycine (bone matrix and connective tissue)
+    The app tracks 30+ individual nutrients with scientific daily targets.
+
+  PILLAR 3 — EXERCISE
+    Specific types of exercise stimulate growth:
+      - Decompression exercises (dead hangs, stretches) elongate the spine.
+      - High-Intensity Interval Training (HIIT) and sprinting trigger natural
+        HGH and IGF-1 (Insulin-like Growth Factor) spikes.
+      - Jump training stimulates bone remodeling.
+      - Postural exercises reduce spinal compression.
+    The app provides a full exercise library and daily workout plans.
+
+  PILLAR 4 — SUPPLEMENTATION
+    Targeted supplements fill nutritional gaps:
+      - Vitamin D3 + K2 combination
+      - Magnesium glycinate (also improves sleep quality)
+      - Zinc
+      - Boron
+      - Ashwagandha (reduces cortisol which suppresses HGH)
+      - Collagen peptides
+    Users can toggle on/off supplements and track their daily intake.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PART 2 — APP SCREENS AND FEATURES (DETAILED)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+────────────────────────────────────────────────────────────────────────────────
+2.1  ONBOARDING & QUESTIONNAIRE
+────────────────────────────────────────────────────────────────────────────────
+
+When a user opens the app for the first time, they go through an onboarding
+flow to establish their personal baseline. This includes:
+
+  Collected Data:
+    - Full name
+    - Date of birth (to calculate age and growth stage)
+    - Gender (Male / Female)
+    - Country of origin
+    - Current height (in cm)
+    - Goal height (the height they want to reach)
+    - Father's height (in cm)
+    - Mother's height (in cm)
+    - Current weight (for BMI and BMR calculations)
+    - Fitness level (Beginner / Intermediate / Advanced)
+
+  Why This Data Matters:
+    - Father's and mother's height are used to calculate the MID-Parental
+      predicted height — a medical estimate of the user's true genetic
+      height ceiling.
+    - Age determines how many growth years are remaining.
+    - Weight enables accurate calorie and macronutrient targets.
+    - Fitness level personalizes the exercise recommendations.
+
+  Calculations Performed from This Data:
+    - Predicted height: ((Mother + Father + Current) / 3) + (23 - age) x 2
+    - BMI: Weight / (Height in meters)²
+    - BMR (Mifflin-St Jeor): Base metabolic rate for calorie targets
+    - TDEE: Daily calorie expenditure (BMR x 1.5 activity multiplier)
+    - Deficit/surplus to goal: How many cm remain to the goal height
+
+────────────────────────────────────────────────────────────────────────────────
+2.2  HOME SCREEN (DASHBOARD)
+────────────────────────────────────────────────────────────────────────────────
+
+The Home Screen is the primary daily view. It gives the user a complete snapshot
+of their progress at a glance.
+
+  Key Sections:
+
+  Weekly Calendar Strip
+    - Shows the last 5 days and today in a 7-day horizontal strip.
+    - Each day shows a completion indicator:
+        * Grey dashed border = habit data exists but incomplete
+        * White solid border = partially completed
+        * Green border = fully completed (Green Day)
+    - Future dates are greyed out.
+    - Drives the habit tracking feedback loop daily.
+
+  Current Height vs. Goal Card
+    - Displays the user's current logged height in large format (e.g., "167.3 cm").
+    - Shows the goal height alongside (e.g., "175 cm").
+    - Shows how many cm remain to the goal (e.g., "7.7 cm away").
+    - Shows total gain since tracking started (e.g., "+1.2 cm total").
+    - Shows monthly growth rate (e.g., "+0.3 cm/month").
+    - A linear progress bar shows percentage completion toward the goal
+      with an estimated achievement date based on current rate.
+    - A live mini line chart plots the height journey over the past 6 months.
+
+  Recent Logs Section
+    - Lists the 3 most recent height log entries with dates and delta changes.
+    - Each entry shows the exact height value and whether it went up or down
+      (green for gain, red for decrease).
+
+  Log Height Button
+    - A prominent call-to-action button at the center of the Home Screen.
+    - Tapping it opens a dialog where the user enters today's measured height.
+    - The app calculates the change from the previous log and stores the entry.
+    - Users are encouraged to measure at the same time of day (ideally morning,
+      when the spine is at full decompressed height).
+
+  Sleep Tracker Card
+    - Shows how many days of "proper sleep" (rated 80+) the user has logged.
+    - A morning check-in button prompts users to rate last night's sleep quality.
+    - Scientific note: Sleep rated 80+ correlates with adequate HGH release.
+    - Once sleep is logged for the day, the button changes to a confirmation state.
+
+  Predicted Height Card (MID-Parental)
+    - Shows the AI-calculated genetic height ceiling based on parental heights
+      and current age.
+    - Informs the user of the gap between their current height and genetic potential.
+    - Uses the mid-parental formula: standard medical height prediction method.
+
+  Stat Chips
+    - "Total Gain": Cumulative height gained since first log.
+    - "To Goal": Centimeters remaining to the user's stated goal.
+
+  AI Insights Promo Banner
+    - Prompts users to upgrade to the Pro plan ($20/month) to unlock real-time
+      AI blocking factor analysis and personalized guidance.
+
+────────────────────────────────────────────────────────────────────────────────
+2.3  TODAY'S PROTOCOL SCREEN (DAILY TASK CHECKLIST)
+────────────────────────────────────────────────────────────────────────────────
+
+This screen is the heart of the daily habit engine. It displays a structured
+protocol — a personalized daily checklist of growth-optimizing actions.
+
+  Structure:
+    Tasks are organized into 4 time groups:
+    - MORNING   (6:00 AM – 12:00 PM)
+    - AFTERNOON (12:00 PM – 6:00 PM)
+    - NIGHT     (6:00 PM – 9:30 PM)
+    - CUSTOM    (user-created tasks at any time)
+
+  Protocol Task Examples (Morning):
+    - Wake up at the same time every day
+    - Drink 500ml of water immediately upon waking
+    - 15 minutes of morning sunlight exposure
+    - Dead hang (spinal decompression, 30 seconds x 2)
+    - Take Vitamin D3 + K2 supplement
+    - Eat a calcium-rich breakfast
+
+  Protocol Task Examples (Afternoon):
+    - High protein lunch
+    - Workout session (from the exercise library)
+    - Boron supplement
+    - 2L water intake checkpoint
+
+  Protocol Task Examples (Night):
+    - Magnesium glycinate before bed
+    - Dark/cool room for sleeping
+    - No screens 1 hour before bed
+    - Sleep on back without thick pillow (reduces spinal compression)
+
+  Features:
+    - Tap any task to mark it complete — it gets a checkmark and is struck through.
+    - A progress counter at the top shows "X / Y tasks completed".
+    - A progress bar with individual dot-segments visualizes daily completion.
+    - Each task can have an optional info tag (tapping an info icon shows a
+      detailed explanation of why that task matters for growth).
+    - Users can add custom tasks with optional info descriptions.
+    - Users can delete their custom tasks.
+    - A date picker allows reviewing past protocol completion history.
+    - A day counter chip shows which day of the program the user is on.
+    - A score badge (e.g., "72/100") shows today's protocol adherence score.
+
+  Rotating Growth Tips Carousel:
+    At the bottom of the screen, a horizontally auto-scrolling carousel
+    displays science-backed growth optimization tips, refreshing every 25 seconds.
+    Examples of tips:
+      - "Sleeping on your back without a pillow reduces spinal compression by 0.5cm."
+      - "Cartilage is 80% water. Hydration keeps spinal discs thick."
+      - "High-intensity sprints trigger natural HGH and IGF-1 spikes."
+      - "Boron increases Vitamin D half-life and reduces inflammation for bone remodeling."
+      - "K2 ensures calcium builds bones rather than clogging arteries."
+
+────────────────────────────────────────────────────────────────────────────────
+2.4  DIET & NUTRITION SCREEN
+────────────────────────────────────────────────────────────────────────────────
+
+The Diet screen is a full-featured nutritional tracker specifically optimized
+for height growth, tracking far more nutrients than a standard fitness app.
+
+  Food Logging:
+    - Users search and log foods from the USDA FoodData Central database
+      (the gold standard nutritional database with 300,000+ foods).
+    - Portions can be adjusted using grams or other units (e.g., slices, cups).
+    - Multiple food items can be logged per day.
+    - Logged foods persist per date — users can view past diet logs.
+
+  Nutrients Tracked (30+ data points):
+    Macros:
+      - Calories, Protein, Carbohydrates, Fat, Fiber
+
+    Key Minerals:
+      - Calcium, Iron, Magnesium, Phosphorus, Potassium
+      - Sodium, Zinc, Copper, Manganese, Selenium, Boron
+
+    Key Vitamins:
+      - Vitamin A, B1 (Thiamin), B2 (Riboflavin), B3 (Niacin)
+      - B5 (Pantothenic acid), B6, B9 (Folate), B12
+      - Vitamin C, D, E, K
+
+    Special Nutrients:
+      - Cholesterol, Omega-3, Choline, Iodine, Fluoride
+
+    Hydration:
+      - Daily water intake (in ml)
+
+  Nutrient Display:
+    - Visual progress bars for each nutrient against the daily target.
+    - "Key nutrients" (most important for height growth) are highlighted.
+    - Progress is shown as both a bar and a percentage of goal.
+
+  Supplement Panel:
+    - A list of recommended supplements with toggle switches.
+    - Each supplement shows dosage, timing, and brief description.
+    - Users can mark supplements as "taken" each day.
+    - Supplements marked as "Key" are shown prominently.
+    - Examples: Vitamin D3, K2, Magnesium, Zinc, Boron, Ashwagandha, Collagen
+
+  Calorie Details:
+    - A dedicated sub-screen showing the complete breakdown of logged calories
+      for the day, with macronutrient split.
+    - Comparison to TDEE (total daily energy expenditure) shows if the user
+      is eating enough to support growth.
+
+  Diet Recipes:
+    - A curated collection of height-optimizing recipes.
+    - Each recipe shows full ingredient list with scalable portions.
+    - Nutritional breakdown per serving is calculated automatically.
+    - Recipe instructions are step-by-step.
+    - Serving size slider allows scaling the recipe up or down.
+    - Tapping a recipe allows logging it directly to today's food intake.
+
+────────────────────────────────────────────────────────────────────────────────
+2.5  EXERCISE SCREEN
+────────────────────────────────────────────────────────────────────────────────
+
+The Exercise screen provides a complete structured workout system designed
+specifically around movements that support maximal height growth.
+
+  Weekly Schedule:
+    - A 7-day view showing which workout is planned for each day.
+    - Days marked as completed vs. today vs. upcoming.
+    - Each day shows the workout type and a brief subtitle.
+
+  Exercise Library:
+    Categories of exercises included:
+      - Decompression & Stretching (spinal decompression dead hangs,
+        cobra stretches, cat-cow, child's pose, forward bends)
+      - Jump Training (box jumps, rope skipping, squat jumps — stimulate
+        bone remodeling and growth plate activity)
+      - HIIT / Sprint Work (triggers HGH and IGF-1 hormone spikes)
+      - Posture Correction (anterior pelvic tilt fixes, rounded shoulder
+        exercises, core strengthening)
+      - Yoga / Pilates (full spinal elongation and flexibility)
+      - Strength (compound movements to support bone density)
+
+  Each Exercise Entry Includes:
+    - Exercise name
+    - Duration or repetition count
+    - Intensity level (Low / Medium / High)
+    - Brief description of benefits for height growth
+    - Completion checkbox
+
+  Recovery Section:
+    - Lists recovery protocols between workouts.
+    - Examples: Cold/hot contrast shower, foam rolling, adequate nutrition
+      post-workout, magnesium bath soaks.
+
+  Exercise Logging:
+    - Users can mark individual exercises as completed.
+    - The app tracks which days had an exercise session for streak calculations.
+
+────────────────────────────────────────────────────────────────────────────────
+2.6  INSIGHTS SCREEN (AI-POWERED ANALYTICS)
+────────────────────────────────────────────────────────────────────────────────
+
+The Insights screen is the most advanced section of the app. It synthesizes
+all user data and uses AI (DeepSeek/LLM API) to produce personalized analysis.
+
+  Level & XP System:
+    - Users earn XP (experience points) by unlocking achievements.
+    - XP accumulates into levels (250 XP per level).
+    - A level badge is displayed prominently at the top of the Insights screen.
+    - Progress bar shows XP toward the next level.
+
+  AI Blocking Factor Analysis (Weekend Feature):
+    - Every weekend, the app sends the user's weekly data to an AI model.
+    - The AI identifies the top 3 "blocking factors" — specific habit failures
+      that are most limiting the user's growth potential.
+    - Each blocking factor includes:
+        * A descriptive title (e.g., "Insufficient Calcium Intake")
+        * The user's current stat (e.g., "Only 800mg/day vs 2500mg target")
+        * An actionable recommendation
+        * An impact severity rating: HIGH / MEDIUM / LOW
+        * A color indicator (red = critical, orange = warning, green = good)
+    - This is the core value proposition of the Pro tier subscription.
+
+  6-Month AI Height Forecast:
+    - Based on historical height logs and monthly reports, the AI projects
+      the user's height trajectory for the next 6 months.
+    - The forecast chart shows:
+        * Past data points (actual measured heights) — solid line
+        * Projected data points (AI prediction) — dashed/different style
+    - The AI returns a projected final height and estimated target month.
+    - This motivates users by showing a concrete number and timeline.
+
+  Monthly Reports:
+    - On the last day of each month, the app generates an AI-powered
+      monthly summary report.
+    - The report is generated from actual tracked data:
+        * Days with 8h+ sleep
+        * Days with exercise logged
+        * Days with nutrition tracked
+        * Average calcium and protein intake
+        * Actual height growth recorded in cm
+    - The AI returns a structured report card with:
+        * Total cm gained that month
+        * Overall habit consistency score (0–100%)
+        * Estimated percentile ranking vs. other users optimizing for height
+    - Reports accumulate over months to build a history timeline.
+
+  Achievements System:
+    - 30+ achievement badges organized into categories:
+        GROWTH Achievements:
+          • First Log — Log your height at least once (10 XP)
+          • +0.5cm Club — Gain 0.5cm above starting height (150 XP)
+          • +1cm Club — Gain 1cm above starting height (100 XP)
+          • +3cm Club — Gain 3cm above starting height (300 XP)
+          • +5cm Milestone — Gain 5cm above starting height (500 XP)
+
+        STREAK Achievements (Green Mission Path — all habits done):
+          • 3-Day Streak (20 XP)
+          • 7-Day Streak (50 XP)
+          • 14-Day Streak (100 XP)
+          • 30-Day Streak (200 XP)
+          • 100-Day Streak (1000 XP)
+
+        SLEEP Achievements:
+          • Early Bird — 3 days of proper sleep (25 XP)
+          • Sleeper Pro — 14 days (75 XP)
+          • 8 Hours Club — 30 days (50 XP)
+          • Deep Rest — 60 days (100 XP)
+          • Circadian King — 100 days (250 XP)
+
+        NUTRITION Achievements:
+          • Calcium King — 2500mg/day for 50 days (50 XP)
+          • Protein Power — 150g/day for 50 days (50 XP)
+          • Hydrated — 2000ml water/day for 50 days (25 XP)
+          • Vitamin D — Hit target for 50 days (50 XP)
+          • Balanced Diet — Track nutrients for 50 days (100 XP)
+
+        EXERCISE Achievements:
+          • 3-Day Exercise Streak (20 XP) through
+          • 365-Day Exercise Streak (1500 XP)
+
+    - Achievements can be filtered by category.
+    - Unlocked achievements are permanently stored.
+    - New achievements unlock in real-time as thresholds are crossed.
+
+────────────────────────────────────────────────────────────────────────────────
+2.7  SETTINGS SCREEN
+────────────────────────────────────────────────────────────────────────────────
+
+The Settings screen allows full customization of the user profile and app
+preferences.
+
+  Profile Settings:
+    - Update name, height, goal height, weight, birthday, country, gender.
+    - Update parent heights (mother and father).
+    - Change fitness level.
+
+  App Preferences:
+    - Unit system (metric cm/kg or imperial ft-in/lbs).
+    - Notification preferences.
+    - Data export / backup options.
+
+  Account:
+    - Subscription management (view current plan, upgrade/downgrade).
+    - Restore purchases.
+
+────────────────────────────────────────────────────────────────────────────────
+2.8  REPORTS HISTORY SCREEN
+────────────────────────────────────────────────────────────────────────────────
+
+  - Lists all monthly AI reports generated so far.
+  - Each report entry shows:
+      * Month and year
+      * CM gained that month
+      * Consistency score
+      * Top percentile ranking
+  - Gives a longitudinal view of the user's growth journey.
+
+────────────────────────────────────────────────────────────────────────────────
+2.9  SUBSCRIPTION & PLANS
+────────────────────────────────────────────────────────────────────────────────
+
+Height Leveling uses a freemium model with two paid tiers:
+
+  BASIC PLAN — $1/month
+    - Unlimited height logs
+    - Advanced growth charts
+    - Basic AI predictions
+    - Cloud sync & backup
+
+  PRO PLAN — $20/month (Recommended)
+    - Everything in Basic
+    - Real-time AI insights (blocking factor analysis)
+    - Custom growth plans
+    - Priority support
+    - No advertisements
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PART 3 — TECHNICAL SUMMARY (PLATFORM & STACK, NO CODE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+────────────────────────────────────────────────────────────────────────────────
+3.1  Height Leveling — TECHNICAL OVERVIEW
+────────────────────────────────────────────────────────────────────────────────
+
+  Platform: Cross-platform mobile app (iOS + Android + Web + Desktop)
+  Framework: Flutter (Google's cross-platform UI framework using Dart language)
+  
+  State Management: Provider (reactive state management pattern)
+  Data Storage: Local device storage via SharedPreferences (JSON persistence)
+  Charting: fl_chart library (line charts for growth tracking)
+  
+  External APIs:
+    - USDA FoodData Central API — nutritional database for food logging
+    - DeepSeek AI API — for blocking factor analysis, monthly reports,
+      and 6-month height forecasting
+  
+  Data persisted locally (no account required by default):
+    - User profile
+    - All height logs
+    - All nutrition logs (per day)
+    - Exercise logs (per day)
+    - Sleep logs (per day)
+    - Protocol task completion (per day)
+    - Unlocked achievements
+    - Monthly reports
+
+  Design:
+    - Dark theme (deep background with white/grey typography)
+    - Accent color scheme (warm gold/amber tones)
+    - Material Design components
+    - Emoji-forward UI for friendly, gamified feel
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PART 4 — VISION AND LONG-TERM GOALS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+────────────────────────────────────────────────────────────────────────────────
+4.1  WHAT MAKES Height Leveling DIFFERENT?
+────────────────────────────────────────────────────────────────────────────────
+
+  Unlike generic fitness apps:
+    - Height Leveling is laser-focused on height optimization, not general wellness.
+    - It tracks nutrients that no mainstream app covers (Boron, Choline, etc.).
+    - It uses AI to identify personalized blockers rather than generic advice.
+    - It provides an actual predicted height and timeline based on data.
+    - It gamifies the entire experience with levels, XP, and achievements.
+    - It combines sleep, nutrition, exercise, and supplementation into one
+      unified protocol — the "green day" concept drives total habit consistency.
+
+  Compared to alternatives:
+    - Most height apps are just calculators or basic trackers with no AI.
+    - No other app tracks the 30+ specific nutrients critical for bone growth.
+    - No other app provides AI-generated monthly progress reports with
+      percentile rankings vs. peers.
+
+────────────────────────────────────────────────────────────────────────────────
+4.2  GROWTH ROADMAP (PLANNED FEATURES)
+────────────────────────────────────────────────────────────────────────────────
+
+  Potential future additions:
+    - Social features / community leaderboards
+    - Watch app integration (sleep tracking from wearables)
+    - Barcode scanner for food logging
+    - Personalized AI-generated meal plans based on nutritional gaps
+    - Height measurement via camera/AR (using phone camera for posture analysis)
+    - Integration with health platforms (Apple Health, Google Fit)
+    - Streak reminders and smart push notifications
+    - In-app coaching sessions from a virtual AI growth coach
+
+────────────────────────────────────────────────────────────────────────────────
+4.3  MONETIZATION STRATEGY
+────────────────────────────────────────────────────────────────────────────────
+
+  Current:
+    - Freemium model: Free core tracking, paid AI insights
+    - Basic plan: $1/month — removes barriers to entry, builds user base
+    - Pro plan: $20/month — captures serious users willing to invest in results
+
+  Future Options:
+    - Annual subscription discount
+    - One-time lifetime purchase option
+    - A "family plan" for parents tracking multiple children
+    - Partnerships with supplement brands for affiliate recommendations
+
+────────────────────────────────────────────────────────────────────────────────
+4.4  TARGET METRIC SUCCESS INDICATORS
+────────────────────────────────────────────────────────────────────────────────
+
+  The product is succeeding when:
+    - Users report measurable height gains after 3–6 months of consistent use.
+    - Daily active usage (protocol completion rate) stays above 60%.
+    - Free-to-paid conversion rate reaches 10%+ (industry average: 5%).
+    - Monthly churn rate stays below 5% for Pro subscribers.
+    - Organic growth through user testimonials and before/after posts on social media.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Height Leveling is a science-backed, AI-powered, gamified mobile app for
+people who want to optimize their natural height potential. It works by unifying
+four growth pillars (sleep, nutrition, exercise, supplementation) into a single
+daily protocol with structured tracking, AI analysis, and a rewards system.
+
+================================================================================
+  END OF DOCUMENT
+================================================================================
