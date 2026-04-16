@@ -69,7 +69,9 @@ Remember: max 280 chars, sound human, return only the tweet text."""
 
 
 def _clean_tweet(text: str) -> str:
-    text = text.strip().strip('"').strip("'")
+    if not text:
+        return ""
+    text = str(text).strip().strip('"').strip("'")
     if len(text) > 280:
         text = text[:277] + "..."
     return text

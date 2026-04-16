@@ -195,4 +195,16 @@ def generate_with_openrouter(
         headers=headers, json=payload, timeout=60,
     )
     r.raise_for_status()
-    return r.json()["choices"][0]["message"]["content"].strip()
+    
+    data = r.json()
+    choices = data.get("choices", [])
+    if not choices:
+        return ""
+        
+    msg = choices[0].get("message", {})
+    content = msg.get("content")
+    
+    if content is None:
+        return ""
+        
+    return content.strip()
