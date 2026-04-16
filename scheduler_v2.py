@@ -82,7 +82,7 @@ class AutonomousScheduler:
         # Set before start()
         self.provider: str = "OpenRouter"          # "OpenRouter" or "Google Gemini"
         self.api_key: str = ""                      # key for chosen provider
-        self.model_id: str = "openai/gpt-4o-mini"
+        self.model_id: str = "openrouter/elephant-alpha · 262k ctx"
         self.app_name: str = "Height Leveling"
         self.project_folder: str = "./project"
 
