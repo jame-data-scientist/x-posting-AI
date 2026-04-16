@@ -103,14 +103,14 @@ def get_or_key():
         val = st.secrets.get("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY", ""))
     except Exception:
         val = os.getenv("OPENROUTER_API_KEY", "")
-    return str(val).strip(' "\'') if val else ""
+    return str(val).strip().strip(' "\'') if val else ""
 
 def get_gemini_key():
     try:
         val = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY", ""))
     except Exception:
         val = os.getenv("GEMINI_API_KEY", "")
-    return str(val).strip(' "\'') if val else ""
+    return str(val).strip().strip(' "\'') if val else ""
 
 APP_NAME = os.getenv("APP_NAME", "Height Leveling")
 PROJ_DIR = os.getenv("PROJECT_FOLDER", "./project")
