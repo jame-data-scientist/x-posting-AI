@@ -65,7 +65,7 @@ SYSTEM_PROMPT = """You are a social media expert specialising in mobile app mark
 Your job is to write authentic, engaging tweets that grow an indie developer's audience.
 
 Rules:
-- Max 280 characters per tweet #IMPORTANT
+- Max 250 characters per tweet #IMPORTANT
 - No hashtag spam (max 2 relevant hashtags, or none if it feels forced)
 - No emojis unless they genuinely add value
 - Sound like a real human developer, not a corporate brand
@@ -87,15 +87,15 @@ Tone: {tone.upper()}
 Instructions: {instruction}
 
 Write ONE tweet about {app_name} using the above context and tone.
-Remember: max 280 chars, sound human, return only the tweet text."""
+Remember: max 250 chars, sound human, return only the tweet text."""
 
 
 def _clean_tweet(text: str) -> str:
     if not text:
         return ""
     text = str(text).strip().strip('"').strip("'")
-    if len(text) > 280:
-        text = text[:277] + "..."
+    if len(text) > 250:
+        text = text[:247] + "..."
     return text
 
 
