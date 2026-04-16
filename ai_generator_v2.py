@@ -88,6 +88,7 @@ def generate_posts_openrouter(
     project_context = read_project_folder(project_folder)
     posts = []
 
+    import time
     for i in range(count):
         tone = TONES_LIST[i % len(TONES_LIST)]
         prompt = _make_prompt(app_name, project_context, tone)
@@ -105,6 +106,10 @@ def generate_posts_openrouter(
             posts.append({"tone": tone, "content": _clean_tweet(text)})
         except Exception as e:
             posts.append({"tone": tone, "content": f"[ERROR: {e}]"})
+            
+        # Add a delay to prevent 429 Too Many Requests on free-tier models
+        if i < count - 1:
+            time.sleep(2)
 
     if progress_callback:
         progress_callback(count, count, "done")
@@ -131,6 +136,7 @@ def generate_posts_gemini(
     project_context = read_project_folder(project_folder)
     posts = []
 
+    import time
     for i in range(count):
         tone = TONES_LIST[i % len(TONES_LIST)]
         prompt = _make_prompt(app_name, project_context, tone)
@@ -144,6 +150,10 @@ def generate_posts_gemini(
             posts.append({"tone": tone, "content": _clean_tweet(text)})
         except Exception as e:
             posts.append({"tone": tone, "content": f"[ERROR: {e}]"})
+            
+        # Add a delay for Gemini free tier rate limits (15 RPM)
+        if i < count - 1:
+            time.sleep(3)
 
     if progress_callback:
         progress_callback(count, count, "done")
