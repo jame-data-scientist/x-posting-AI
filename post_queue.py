@@ -55,7 +55,9 @@ def add_posts(posts: list[dict], scheduled_times: list[str] = None):
 
 def get_due_posts() -> list[dict]:
     """Return all pending posts whose scheduled_at time has passed."""
-    now = datetime.utcnow().isoformat()
+    from zoneinfo import ZoneInfo
+    # Use strict EST timezone so SQLite's lexicographical string comparison works correctly
+    now = datetime.now(tz=ZoneInfo("America/New_York")).isoformat()
     with get_conn() as conn:
         rows = conn.execute(
             "SELECT * FROM posts WHERE status='pending' AND scheduled_at <= ? ORDER BY scheduled_at",
