@@ -16,14 +16,16 @@ TONE_INSTRUCTIONS = {
     "30% of the time, make it a standalone funny observation about work, productivity, or builder life — no mention of {app_name}. "
     "70% of the time, make it about {app_name}: pick exactly ONE of these angles: relatable pain point, unexpected analogy, self-aware product joke, or absurdist observation about the problem space. "
     "Humour must feel earned — no forced puns or emoji-as-punchline. "
-    "No exclamation marks. Dry > loud."
+    "No exclamation marks. Dry > loud. "
+    "Max 250 characters per tweet #IMPORTANT"
 ),
 "informative": (
     "Write a single educational tweet. "
     "30% of the time, share a standalone insight about work, productivity, or the problem space {app_name} operates in — no mention of {app_name}. "
     "70% of the time, make it about {app_name}: lead with the insight, not the product — the hook is the surprising fact, stat, or tip. "
     "Frame: choose one — a counterintuitive stat, a concrete before/after, or a step-by-step tip in ≤3 lines. "
-    "No vague claims like 'saves time' — use specifics or skip it."
+    "No vague claims like 'saves time' — use specifics or skip it. "
+    "Max 250 characters per tweet #IMPORTANT"
 ),
 "business": (
     "Write a single professional tweet aimed at decision-makers (founders, managers, ops leads). "
@@ -31,7 +33,8 @@ TONE_INSTRUCTIONS = {
     "70% of the time, make it about {app_name}: lead with outcome — time saved, cost cut, risk reduced, or revenue unlocked. "
     "No jargon: cut 'synergy', 'streamline', 'game-changer', 'robust', 'seamlessly'. "
     "Confident declarative sentences only — no hedging like 'might' or 'could help'. "
-    "One clear value claim. Don't stack three benefits — pick the strongest one."
+    "One clear value claim. Don't stack three benefits — pick the strongest one. "
+    "Max 250 characters per tweet #IMPORTANT"
 ),
 "hype": (
     "Write a single high-energy tweet. "
@@ -39,7 +42,8 @@ TONE_INSTRUCTIONS = {
     "70% of the time, make it about {app_name}: open with momentum — an action, a milestone number, or a bold claim. "
     "Use short sentences — each one lands before the next begins. "
     "One exclamation mark max. Zero 'game-changer', 'next level', or 'revolutionary'. "
-    "End with a pull: what should the reader do or feel next?"
+    "End with a pull: what should the reader do or feel next? "
+    "Max 250 characters per tweet #IMPORTANT"
 ),
 "behind-the-scenes": (
     "Write a single behind-the-scenes tweet from the perspective of a founder or builder. "
@@ -47,7 +51,8 @@ TONE_INSTRUCTIONS = {
     "70% of the time, make it specific to {app_name}: pick one angle — a hard decision made, a surprising user insight, a shipped-vs-scrapped moment, or a candid milestone reflection. "
     "Voice: first person, honest, no PR polish — reads like a real person, not a company. "
     "The vulnerability or specificity IS the hook — don't bury it. "
-    "Avoid: 'Excited to share', 'We're thrilled', 'On this journey'."
+    "Avoid: 'Excited to share', 'We're thrilled', 'On this journey'. "
+    "Max 250 characters per tweet #IMPORTANT"
 ),
 "question": (
     "Write a single question tweet. "
@@ -55,7 +60,8 @@ TONE_INSTRUCTIONS = {
     "70% of the time, make it directly relevant to {app_name}'s niche. "
     "The question must be specific enough to feel answerable but open enough to invite diverse responses. "
     "Avoid yes/no questions and leading questions like 'Don't you think…?'. "
-    "The best replies will be opinions or experiences — not facts."
+    "The best replies will be opinions or experiences — not facts. "
+    "Max 250 characters per tweet #IMPORTANT"
 ),
 }
 
