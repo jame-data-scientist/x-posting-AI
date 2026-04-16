@@ -96,16 +96,15 @@ from openrouter_models import (
 from x_poster import test_connection
 from ai_generator_v2 import generate_posts
 
-# ─── Keys from .env ONLY ──────────────────────────────────────────────────────
-def get_or_key():
-    # Check Streamlit secrets first (for Cloud), then local .env or os environ
+# ─── API Keys (User provided or from .env) ────────────────────────────────────
+def get_or_key_env():
     try:
         val = st.secrets.get("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY", ""))
     except Exception:
         val = os.getenv("OPENROUTER_API_KEY", "")
     return str(val).strip().strip(' "\'') if val else ""
 
-def get_gemini_key():
+def get_gemini_key_env():
     try:
         val = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY", ""))
     except Exception:
@@ -118,7 +117,9 @@ PROJ_DIR = os.getenv("PROJECT_FOLDER", "./project")
 # ─── Session state ────────────────────────────────────────────────────────────
 def _init():
     defs = {
-        "provider":        "Google Gemini" if (get_gemini_key() and not get_or_key()) else "OpenRouter",
+        "provider":        "Google Gemini" if (get_gemini_key_env() and not get_or_key_env()) else "OpenRouter",
+        "usr_or_key":      get_or_key_env(),
+        "usr_gemini_key":  get_gemini_key_env(),
         "or_models":       [],      # all OpenRouter models (live fetched)
         "or_fetched":      False,
         "or_prov_filter":  "All",
@@ -137,15 +138,15 @@ _init()
 init_db()
 
 # ─── Auto-fetch OpenRouter models on first load ───────────────────────────────
-if get_or_key() and not st.session_state.or_fetched:
+if st.session_state.usr_or_key and not st.session_state.or_fetched:
     with st.spinner("⏳ Loading OpenRouter models..."):
-        models = fetch_all_models(get_or_key())
+        models = fetch_all_models(st.session_state.usr_or_key)
         st.session_state.or_models  = models
         st.session_state.or_fetched = True
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 def _api_key():
-    return get_gemini_key() if st.session_state.provider == "Google Gemini" else get_or_key()
+    return st.session_state.usr_gemini_key if st.session_state.provider == "Google Gemini" else st.session_state.usr_or_key
 
 def _active_model():
     return (st.session_state.google_model
@@ -213,20 +214,37 @@ with st.sidebar:
         label_visibility="collapsed",
     )
 
+    # API Key Input
+    if st.session_state.provider == "OpenRouter":
+        st.session_state.usr_or_key = st.text_input(
+            "OpenRouter API Key",
+            value=st.session_state.usr_or_key,
+            type="password",
+            placeholder="sk-or-v1-...",
+            help="Your key is kept in memory while the bot runs."
+        )
+    else:
+        st.session_state.usr_gemini_key = st.text_input(
+            "Gemini API Key",
+            value=st.session_state.usr_gemini_key,
+            type="password",
+            placeholder="AIza...",
+            help="Your key is kept in memory while the bot runs."
+        )
+
     # Key status
     key_ok = bool(_api_key())
     if key_ok:
-        prov_key_name = "OPENROUTER_API_KEY" if st.session_state.provider == "OpenRouter" else "GEMINI_API_KEY"
         st.markdown(f"""
         <div style="background:#0D2A1A;border:1px solid #22C55E40;border-radius:8px;
              padding:6px 12px;font-size:12px;color:#22C55E;margin-top:4px;">
-            ✅ {prov_key_name} loaded from .env
+            ✅ API Key loaded
         </div>""", unsafe_allow_html=True)
     else:
         st.markdown(f"""
         <div style="background:#2A0D0D;border:1px solid #EF444440;border-radius:8px;
              padding:6px 12px;font-size:12px;color:#EF4444;margin-top:4px;">
-            ❌ Add {'OPENROUTER_API_KEY' if st.session_state.provider=='OpenRouter' else 'GEMINI_API_KEY'} to .env
+            ❌ Please enter your API Key
         </div>""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -235,14 +253,14 @@ with st.sidebar:
     if st.session_state.provider == "OpenRouter":
         st.markdown("**🤖 Model — OpenRouter**")
 
-        if not get_or_key():
-            st.caption("Add OPENROUTER_API_KEY to .env to load models")
+        if not st.session_state.usr_or_key:
+            st.caption("Enter your OpenRouter API Key to load models")
         else:
             models = st.session_state.or_models  # list of enriched dicts
             if not models:
                 if st.button("🔄 Retry loading models", use_container_width=True):
                     with st.spinner("Loading..."):
-                        models = fetch_all_models(get_or_key())
+                        models = fetch_all_models(st.session_state.usr_or_key)
                         st.session_state.or_models  = models
                         st.session_state.or_fetched = True
                     st.rerun()
@@ -302,7 +320,7 @@ with st.sidebar:
                 # Refresh button
                 if st.button("🔄 Refresh model list", use_container_width=True):
                     with st.spinner("Refreshing..."):
-                        new_models = fetch_all_models(get_or_key())
+                        new_models = fetch_all_models(st.session_state.usr_or_key)
                         st.session_state.or_models = new_models
                     st.success(f"Loaded {len(new_models)} models")
                     st.rerun()
@@ -347,7 +365,6 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("""
     <div style="font-size:11px;color:#334155;text-align:center;padding-bottom:10px;">
-        All keys from .env only<br>
         Generate: 12:00 AM EST · Post: 2AM 7AM 12PM 4PM 9PM 11PM
     </div>""", unsafe_allow_html=True)
 
@@ -356,7 +373,7 @@ with st.sidebar:
 st.markdown("""
 <div style="padding:24px 0 18px">
     <div class="hero-title">X Auto Poster</div>
-    <div class="hero-sub">Autonomous tweet bot — all keys from .env · 300+ models via OpenRouter</div>
+    <div class="hero-sub">Autonomous tweet bot · 300+ models via OpenRouter</div>
 </div>""", unsafe_allow_html=True)
 
 # ─── Metrics ─────────────────────────────────────────────────────────────────
@@ -434,7 +451,7 @@ with t1:
                 st.success("✅ Bot started! Generates at midnight, posts on schedule.")
                 st.rerun()
             if not active_key:
-                st.caption("⚠️ Add the API key to .env to enable starting")
+                st.caption("⚠️ Enter an API key to enable starting")
 
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -447,7 +464,7 @@ with t1:
             if st.button("⚡ Generate Now", use_container_width=True,
                          help="Generate 6 tweets immediately"):
                 if not active_key:
-                    st.error("No API key in .env")
+                    st.error("No API key provided")
                 else:
                     with st.spinner(f"Generating via {st.session_state.provider}..."):
                         try:
@@ -681,7 +698,7 @@ with t5:
 
         if st.button("🔮 Generate Preview", type="primary", use_container_width=True):
             if not active_key_now:
-                st.error("No API key in .env")
+                st.error("No API key provided")
             else:
                 prog = st.progress(0)
                 stat = st.empty()
