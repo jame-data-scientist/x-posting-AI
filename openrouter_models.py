@@ -14,6 +14,17 @@ GOOGLE_PROVIDERS = {
     "Gemini 2.5": [
         "gemini-2.5-pro",
         "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+    ],
+    "Gemma 4": [
+        "gemma-4-31b-it",
+        "gemma-4-26b-a4b-it",
+    ],
+    "Gemma 3": [
+        "gemma-3-27b-it",
+        "gemma-3-12b-it",
+        "gemma-3-4b-it",
+        "gemma-3-1b-it",
     ],
     "Gemini 2.0": [
         "gemini-2.0-flash",
