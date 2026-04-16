@@ -94,8 +94,8 @@ def _clean_tweet(text: str) -> str:
     if not text:
         return ""
     text = str(text).strip().strip('"').strip("'")
-    if len(text) > 250:
-        text = text[:247] + "..."
+    if len(text) > 280:
+        text = text[:277] + "..."
     return text
 
 
