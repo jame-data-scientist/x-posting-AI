@@ -11,9 +11,9 @@ from pathlib import Path
 TEXT_EXTENSIONS = {".txt", ".md", ".py", ".json", ".html", ".htm", ".csv", ".yaml", ".yml", ".toml", ".rst"}
 
 # Max chars to read per file (avoid token overload)
-MAX_CHARS_PER_FILE = 3000
+MAX_CHARS_PER_FILE = 50000
 # Max total chars to send to Gemini
-MAX_TOTAL_CHARS = 15000
+MAX_TOTAL_CHARS = 100000
 
 
 def read_project_folder(folder_path: str) -> str:
