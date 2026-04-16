@@ -12,19 +12,19 @@ OPENROUTER_API_URL  = "https://openrouter.ai/api/v1/models"
 # ─── Google Gemini native models ─────────────────────────────────────────────
 GOOGLE_PROVIDERS = {
     "Gemini 2.5": [
-        "gemini-2.5-pro-preview-03-25",
-        "gemini-2.5-flash-preview-04-17",
+        "gemini-2.5-pro",
+        "gemini-2.5-flash",
     ],
     "Gemini 2.0": [
         "gemini-2.0-flash",
         "gemini-2.0-flash-lite",
-        "gemini-2.0-flash-thinking-exp",
     ],
     "Gemini 1.5": [
         "gemini-1.5-pro",
         "gemini-1.5-flash",
         "gemini-1.5-flash-8b",
     ],
+
     "Gemini 1.0": [
         "gemini-1.0-pro",
     ],
