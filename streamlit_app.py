@@ -122,7 +122,7 @@ def _init():
         "or_models":       [],      # all OpenRouter models (live fetched)
         "or_fetched":      False,
         "or_prov_filter":  "All",
-        "or_model_id":     "openai/gpt-4o-mini",
+        "or_model_id":     "openrouter/elephant-alpha",
         "google_family":   "Gemini 2.0",
         "google_model":    "gemini-2.0-flash",
         "app_name":        APP_NAME,
