@@ -12,29 +12,51 @@ from openrouter_models import generate_with_openrouter
 # ── Tone definitions ──────────────────────────────────────────────────────────
 TONE_INSTRUCTIONS = {
     "funny": (
-        "Write a witty, humorous tweet about the app. Use light humour, relatable pain points, "
-        "or a funny observation. Keep it natural and shareable."
-    ),
-    "informative": (
-        "Write a clear, useful tweet that teaches the reader something about the app or problem it solves. "
-        "Could be a tip, a stat, a 'did you know', or a feature highlight."
-    ),
-    "business": (
-        "Write a professional, value-focused tweet. Highlight ROI, time saved, or productivity benefits. "
-        "Tone: confident, credible, not salesy."
-    ),
-    "hype": (
-        "Write an energetic, exciting tweet that builds anticipation or celebrates the app. "
-        "Use momentum language. Short punchy sentences. Think startup launch energy."
-    ),
-    "behind-the-scenes": (
-        "Write a transparent, authentic tweet that gives a glimpse behind the scenes — "
-        "why you built this, a challenge you faced, a lesson learned, or a milestone."
-    ),
-    "question": (
-        "Write an engaging question tweet that invites replies. "
-        "Relevant to your app's niche. Goal: start a conversation."
-    ),
+    "Write a single witty tweet. "
+    "30% of the time, make it a standalone funny observation about work, productivity, or builder life — no mention of {app_name}. "
+    "70% of the time, make it about {app_name}: pick exactly ONE of these angles: relatable pain point, unexpected analogy, self-aware product joke, or absurdist observation about the problem space. "
+    "Humour must feel earned — no forced puns or emoji-as-punchline. "
+    "No exclamation marks. Dry > loud."
+),
+"informative": (
+    "Write a single educational tweet. "
+    "30% of the time, share a standalone insight about work, productivity, or the problem space {app_name} operates in — no mention of {app_name}. "
+    "70% of the time, make it about {app_name}: lead with the insight, not the product — the hook is the surprising fact, stat, or tip. "
+    "Frame: choose one — a counterintuitive stat, a concrete before/after, or a step-by-step tip in ≤3 lines. "
+    "No vague claims like 'saves time' — use specifics or skip it."
+),
+"business": (
+    "Write a single professional tweet aimed at decision-makers (founders, managers, ops leads). "
+    "30% of the time, share a standalone hard-won business lesson or contrarian take — no mention of {app_name}. "
+    "70% of the time, make it about {app_name}: lead with outcome — time saved, cost cut, risk reduced, or revenue unlocked. "
+    "No jargon: cut 'synergy', 'streamline', 'game-changer', 'robust', 'seamlessly'. "
+    "Confident declarative sentences only — no hedging like 'might' or 'could help'. "
+    "One clear value claim. Don't stack three benefits — pick the strongest one."
+),
+"hype": (
+    "Write a single high-energy tweet. "
+    "30% of the time, make it an energetic take on a builder milestone, a lesson, or a moment in the {app_name} niche — no direct mention of {app_name}. "
+    "70% of the time, make it about {app_name}: open with momentum — an action, a milestone number, or a bold claim. "
+    "Use short sentences — each one lands before the next begins. "
+    "One exclamation mark max. Zero 'game-changer', 'next level', or 'revolutionary'. "
+    "End with a pull: what should the reader do or feel next?"
+),
+"behind-the-scenes": (
+    "Write a single behind-the-scenes tweet from the perspective of a founder or builder. "
+    "30% of the time, share a raw, personal reflection on building in general — no mention of {app_name}. "
+    "70% of the time, make it specific to {app_name}: pick one angle — a hard decision made, a surprising user insight, a shipped-vs-scrapped moment, or a candid milestone reflection. "
+    "Voice: first person, honest, no PR polish — reads like a real person, not a company. "
+    "The vulnerability or specificity IS the hook — don't bury it. "
+    "Avoid: 'Excited to share', 'We're thrilled', 'On this journey'."
+),
+"question": (
+    "Write a single question tweet. "
+    "30% of the time, ask a broad, thought-provoking question about work, building, or the niche {app_name} operates in — no mention of {app_name}. "
+    "70% of the time, make it directly relevant to {app_name}'s niche. "
+    "The question must be specific enough to feel answerable but open enough to invite diverse responses. "
+    "Avoid yes/no questions and leading questions like 'Don't you think…?'. "
+    "The best replies will be opinions or experiences — not facts."
+),
 }
 
 TONES_LIST = list(TONE_INSTRUCTIONS.keys())
@@ -54,7 +76,7 @@ Rules:
 
 
 def _make_prompt(app_name: str, project_context: str, tone: str) -> str:
-    instruction = TONE_INSTRUCTIONS.get(tone, TONE_INSTRUCTIONS["informative"])
+    instruction = TONE_INSTRUCTIONS.get(tone, TONE_INSTRUCTIONS["informative"]).format(app_name=app_name)
     return f"""Here is the context about the app called "{app_name}":
 
 {project_context}
