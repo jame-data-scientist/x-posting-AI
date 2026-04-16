@@ -190,10 +190,19 @@ def generate_with_openrouter(
         "temperature": temperature,
         "max_tokens":  max_tokens,
     }
-    r = requests.post(
-        "https://openrouter.ai/api/v1/chat/completions",
-        headers=headers, json=payload, timeout=60,
-    )
+    # Implement retry loop for 429 Too Many Requests
+    import time
+    max_retries = 3
+    for attempt in range(max_retries):
+        r = requests.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            headers=headers, json=payload, timeout=60,
+        )
+        if r.status_code == 429 and attempt < max_retries - 1:
+            time.sleep(3 + attempt * 2) # Exponential-ish backoff: 3s, 5s...
+            continue
+        break
+        
     r.raise_for_status()
     
     data = r.json()
